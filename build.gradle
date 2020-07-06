@@ -1,0 +1,39 @@
+plugins{
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.71'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+jar {
+    /××
+    这里要配置的是工程的入口，我的main函数写在main.kt文件里，kotlin编译器会给我们生成一个MainKt类，这个类就是程序的入口，再比如main函数写在kot.kt里，就是KotKt类
+    再举个例子：attributes 'Main-Class': 'com.myname.myprojectname.MainKt'
+    ×/
+    manifest {
+        attributes 'Main-Class': 'MainKt'
+    }
+    /××
+    这个配置将所有的依赖一起打包入jar文件
+    ×/
+    from {
+        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

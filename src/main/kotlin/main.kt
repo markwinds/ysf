@@ -11,7 +11,10 @@ fun main(args : Array<String>){
 //            emulator.aimNum = args[0].toInt()
 //        }
 //    }
-    emulator.aimNum = 29
-    emulator.alipay()
-    //emulator.test(6)
+    emulator.aimNum = 3949
+    emulator.ysf()
+
+//    emulator.getTopActivity()
+
+    //emulator.test()
 }
